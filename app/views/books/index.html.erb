@@ -1,0 +1,24 @@
+<div class="container">
+
+	<h1>Books</h1>
+	<hr>
+	<div class="row">
+		<div class="col-md-9">
+			<h2>Books Avaliable</h2>
+			<% if @books.any? %>
+				<ul>
+					<% @books.each do |book| %>
+						<li><%= link_to book.title, book_path(book) %></li>
+					<% end %>
+				</ul>
+			<% else %>
+				<p>There are no books currently.</p>
+			<% end %>
+
+			<p><%= link_to "New Book", new_book_path %> </p>
+		</div>
+		<div class="col-md-3 tags">
+			<h4>Tags</h4>
+		</div>
+	</div>
+</div>

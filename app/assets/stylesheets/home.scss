@@ -1,0 +1,23 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.home {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/jessica-ruscello-196422.jpg");
+    color: white;
+    background-size: cover;
+    padding: 206px;
+    margin: -8px;
+}
+
+.home h1 {
+    font-size: 100px;
+    margin: 0;
+}
+
+.button {
+    color: white;
+}
+
+.button:hover {
+    color: black;
+}
