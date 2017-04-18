@@ -8,7 +8,15 @@
 			<% if @books.any? %>
 				<ul>
 					<% @books.each do |book| %>
-						<li><%= link_to book.title, book_path(book) %></li>
+						<div class="book-coverpage">
+							<style>
+								.book-coverpage {
+									background-image: url(<%= book.book_cover %>);
+									background-size: cover;
+								}
+							</style>
+							<li><%= link_to book.title, book_path(book) %></li>
+						</div>
 					<% end %>
 				</ul>
 			<% else %>
@@ -17,8 +25,11 @@
 
 			<p><%= link_to "New Book", new_book_path %> </p>
 		</div>
-		<div class="col-md-3 tags">
+		<div class="col-md-3 tag_cloud">
 			<h4>Tags</h4>
+			<% tag_cloud Book.tag_counts, %w{s m l} do |tag, css_class| %>
+				<%= link_to tag.name, tag_path(tag.name), class: css_class %>
+			<% end %>
 		</div>
 	</div>
 </div>

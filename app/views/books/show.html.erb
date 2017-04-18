@@ -1,12 +1,18 @@
 <div class="container">
 
+	<%= image_tag @book.book_cover.url(:thumb) %>
+
 	<h1><%= @book.title %></h1>
 
 	<h4><%= @book.description %></h4>
 
-	<p><%= @book.content %></p>
+	<p><%= raw(@book.tag_list.map { |t| link_to t, tag_path(t) }.join(', ')) %></p>
 
-	<p><%= link_to "Edit Book", edit_book_path(@book) %> | <%= link_to "Delete Book", book_path(@book), :data => {:confirm => "Are you sure?", :method => "delete"} %></p>
+	<p><%= @book.content %></p>
+	
+	<% if @book.user == current_user %>
+		<p><%= link_to "Edit Book", edit_book_path(@book) %> | <%= link_to "Delete Book", book_path(@book), :data => {:confirm => "Are you sure?", :method => "delete"} %></p>
+	<% end %>
 
 	<h3>Comments</h3>
 	<% if @book.comments.any? %>
@@ -14,9 +20,9 @@
 			<% @book.comments.each do |comment| %>
 				<li>
 					<%= comment.comment_body %><br>
-					<%= link_to "Edit Comment", edit_book_comment_path(@book, comment) %> | 
-					<%= link_to "Delete Comment", book_comment_path(@book, comment), 
-					:data => {:confirm => "Are you sure?", :method => "delete"} %>
+						<%= link_to "Edit Comment", edit_book_comment_path(@book, comment) %> | 
+						<%= link_to "Delete Comment", book_comment_path(@book, comment), 
+						:data => {:confirm => "Are you sure?", :method => "delete"} %>
 				</li>
 			<% end %>
 		</ul>

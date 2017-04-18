@@ -1,6 +1,13 @@
 class BooksController < ApplicationController
+
+  before_action :authenticate_user!, :except => [:index, :show]
+
   def index
-    @books = Book.all
+    if params[:tag]
+      @books = Book.tagged_with(params[:tag])
+    else
+      @books = Book.all
+    end
   end
 
   def show
@@ -8,11 +15,11 @@ class BooksController < ApplicationController
   end
 
   def new
-    @book = Book.new
+    @book = current_user.books.new
   end
 
   def create
-    @book = Book.new(book_params)
+    @book = current_user.books.new(book_params)
     if @book.save
       redirect_to books_path
     else
@@ -41,6 +48,6 @@ class BooksController < ApplicationController
 
   private
   def book_params
-    params.require(:book).permit(:title, :description, :content)
+    params.require(:book).permit(:title, :description, :content, :book_cover, :tag_list)
   end
 end

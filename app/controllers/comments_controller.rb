@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
 
+  before_action :authenticate_user!
+
   def new
     @book = Book.find(params[:book_id])
     @comment = @book.comments.new

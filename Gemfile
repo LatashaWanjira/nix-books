@@ -61,3 +61,7 @@ gem 'bootstrap-sass'
 gem 'sprockets-rails'
 
 gem 'acts-as-taggable-on', '~> 4.0'
+
+gem "paperclip", "~> 5.0.0"
+
+gem 'devise'
